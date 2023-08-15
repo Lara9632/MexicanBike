@@ -1,11 +1,11 @@
-{% assign main_menu_linklists = linklist[section.settings.menu].link %}
+{% assign main_menu_linklist = linklists[section.settings.menu].links %}
 
 <div class="relative bg-white" x-data="{ mobileMenuOpen: false }">
   <div class="mx-auto px-4 sm:px-6">
     <div class="flex justify-between items-center py-6 md:justify-start md:space-x-10">
       <!-- STORE NAME / STORE LOGO -->
       <div class="flex justify-start lg:flex-1 truncate">
-        <h1 class="text-xl font-bold truncate">{{ shop.name }}</h1>
+        <h1 class="text-xl font-bold truncate">{{ section.settings.mobile_menu_title }}</h1>
       </div>
 
       <div class="-mr-2 -my-2 ml-3 md:hidden">
@@ -19,7 +19,7 @@
 
       <!-- NAVIGATION MENU -->
       <nav class="hidden md:flex space-x-10">
-        {% for link in main_menu_linklists %}
+        {% for link in main_menu_linklist %}
           {% if link.links != blank %}
             {% assign link_handle = link.handle | replace: '-', '_' %}
             <div x-data="{ {{ link_handle }}: false }" class="relative">
@@ -69,8 +69,12 @@
           {% render 'icon-shopping-bag' %}
         </a>
 
-        <a href="{{ routes.account_login_url }}" class="text-base text-gray-500 hover:text-gray-900">Login</a>
-        <a href="{{ routes.account_register_url }}" class="text-base text-gray-500 hover:text-gray-900">Register</a>
+        {% if shop.customer_accounts_enabled %}
+
+          <a href="{{ routes.account_login_url }}" class="text-base text-gray-500 hover:text-gray-900">Login</a>
+          <a href="{{ routes.account_register_url }}" class="text-base text-gray-500 hover:text-gray-900">Register</a>
+
+        {% endif %}
       </div>
     </div>
   </div>
@@ -97,7 +101,7 @@
         <!-- NAVIGATION LINKS FOR MOBILE MENU -->
         <div class="pt-3">
           <nav class="grid gap-y-7">
-            {% for link in main_menu_linklists %}
+            {% for link in main_menu_linklist %}
               {% assign link_handle = link.handle | replace: '-', '_' %}
               {% if link.links != blank %}
 
@@ -146,7 +150,7 @@
         "type": "text",
         "id": "mobile_menu_title",
         "label": "Title",
-        "default": "Menu",
+        "default": "Main menu",
         "info": "This is the title of the mobile menu"
       }, {
         "type": "link_list",

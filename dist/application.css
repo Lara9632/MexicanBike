@@ -676,10 +676,6 @@ video {
   width: 100vw;
 }
 
-.w-10 {
-  width: 2.5rem;
-}
-
 .max-w-3xl {
   max-width: 48rem;
 }
@@ -698,6 +694,10 @@ video {
 
 .max-w-md {
   max-width: 28rem;
+}
+
+.max-w-xl {
+  max-width: 36rem;
 }
 
 .origin-top-left {
@@ -882,10 +882,6 @@ video {
   padding-top: 0.75rem;
 }
 
-.text-left {
-  text-align: left;
-}
-
 .text-center {
   text-align: center;
 }
@@ -918,11 +914,6 @@ video {
 .text-xl {
   font-size: 1.25rem;
   line-height: 1.75rem;
-}
-
-.text-7xl {
-  font-size: 4.5rem;
-  line-height: 1;
 }
 
 .font-bold {

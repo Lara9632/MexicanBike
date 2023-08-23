@@ -13,7 +13,7 @@
           "type": "checkout_button"
         }
       },
-      "block_order": ["subtotal","update_button","update_button"]
+      "block_order": ["subtotal","update-button","checkout-button"]
     }
   },
   "order": ["template"]

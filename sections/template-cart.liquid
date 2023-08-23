@@ -64,20 +64,34 @@
                 class="w-full md:max-w-lg resize-none border h-20"></textarea>
             </div>
           </div>
+
           <div class="w-full my-4 mx-4 md:w-80">
-            <h3 class="text-xl">Subtotal: {{ cart.total_price | money_with_currency }}</h3>
-            <div class="my-2">
-              <button
-                type="submit"
-                name="update"
-                class="w-full p-3 border border-gray-600 text-gray-600 font-medium hover:bg-gray-600 hover:text-white">Update</button>
-            </div>
-            <div class="my-2">
-              <button
-                type="submit"
-                name="checkout"
-                class="w-full p-3 border border-gray-600 font-medium bg-gray-600 text-white">Checkout</button>
-            </div>
+            {% for block in section.blocks %}
+              {% case block.type %}
+                {% when 'subtotal' %}
+                <h3 class="text-xl">Subtotal: {{ cart.total_price | money_with_currency }}</h3>
+                {% when 'update_button' %}
+                <div class="my-2">
+                  <button
+                    type="submit"
+                    name="update"
+                    class="w-full p-3 border border-gray-600 text-gray-600 font-medium hover:bg-gray-600 hover:text-white">{{ section.settings.button_update_price }}</button>
+                </div>
+                {% when 'checkout_button' %}
+                <div class="my-2">
+                  <button
+                    type="submit"
+                    name="checkout"
+                    class="w-full p-3 border border-gray-600 font-medium bg-gray-600 text-white">{{ section.settings.button_checkout }}</button>
+                </div>
+
+            {% else %}
+
+              {% endcase %}
+            {% endfor %}
+
+
+
           </div>
         </div>
       </form>
@@ -98,7 +112,20 @@
 
 {% schema %}
   {
-    "name": "Template-Cart",
+    "name": "Template Cart",
+    "settings": [
+      {
+        "type": "text",
+        "id": "button_update_price",
+        "label": "Update Price Button",
+        "default": "Update"
+      }, {
+        "type": "text",
+        "id": "button_checkout",
+        "label": "Checkout Button",
+        "default": "Checkout"
+      }
+    ],
     "blocks": [
       {
         "type": "subtotal",

@@ -4,11 +4,11 @@
       <div class="h-80 overflow-hidden">
         {% if custom_attribute_of_product.featured_image %}
           <img
-            class="w-full h-full object-cover"
+            class="w-full h-full object-cover transition duration-700 ease-in-out hover:scale-110 transform"
             src="{{ custom_attribute_of_product.featured_image | img_url: 'medium'  }}"
             alt="{{ custom_attribute_of_product.featured_image.alt }}">
         {% else %}
-          {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-cover border bg-gray-100' }}
+          {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-cover border bg-gray-100 transition duration-700 ease-in-out hover:scale-110 transform' }}
         {% endif %}
       </div>
     </a>

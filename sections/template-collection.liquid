@@ -1,0 +1,46 @@
+<div class="px-4 py-8">
+  {% paginate collection.products by section.settings.products_per_page %}
+    <h1 class="text-3xl text-center">{{ collection.title }}</h1>
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {% for product in collection.products %}
+          {% render 'product-card', custom_attribute_of_product: product, show_vendor: section.settings.show_vendor %}
+
+        {% else %}
+          <p>{{ section.settings.label_no_products_to_show }}</p>
+        {% endfor %}
+      </div>
+    </div>
+
+
+    {% render 'pagination' pagination: paginate %}
+  {% endpaginate %}
+
+</div>
+
+
+{% schema %}
+  {
+    "name": "Template Collection",
+    "settings": [
+      {
+        "type": "number",
+        "id": "products_per_page",
+        "label": "Products per Page",
+        "default": 6,
+        "info": "Select the number of products to show per page"
+      }, {
+        "type": "text",
+        "id": "label_no_products_to_show",
+        "label": "Label for empty collection",
+        "default": "There are no products inside of this collection",
+        "info": "Set the text that show when the collection is empty"
+      }, {
+        "type": "checkbox",
+        "id": "show_vendor",
+        "label": "Show Vendor",
+        "default": true
+      }
+    ]
+  }
+{% endschema %}

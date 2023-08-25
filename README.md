@@ -66,3 +66,5 @@ shopify theme init [ NAME OF YOUR THEME ] --clone-url https://github.com/Lara963
 Feel free to adapt the theme's components, styles, and layouts to suit your project's needs. Use Tailwind CSS utility classes for rapid development.
 
 
+This project is created and intended to be used for the [Shopify Theme Development – Online Store 2.0 + TailwindCSS course](https://weeklyhow.com/courses/)
+

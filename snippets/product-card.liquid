@@ -1,14 +1,14 @@
 <div class="w-full py-6 px-3">
-  <div class="border bg-white shadow-lg rounded-lg overflow-hidden">
+  <div class="border bg-white shadow-lg rounded-lg overflow-hidden transition duration-700 ease-in-out hover:scale-105 transform">
     <a href="{{ custom_attribute_of_product.url }}">
-      <div class="h-80 overflow-hidden">
+      <div class="h-64 overflow-hidden">
         {% if custom_attribute_of_product.featured_image %}
           <img
-            class="w-full h-full object-cover transition duration-700 ease-in-out hover:scale-110 transform"
+            class="w-full h-full object-cover"
             src="{{ custom_attribute_of_product.featured_image | img_url: 'medium'  }}"
             alt="{{ custom_attribute_of_product.featured_image.alt }}">
         {% else %}
-          {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-cover border bg-gray-100 transition duration-700 ease-in-out hover:scale-110 transform' }}
+          {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-cover border bg-gray-100' }}
         {% endif %}
       </div>
     </a>

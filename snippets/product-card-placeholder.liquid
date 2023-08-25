@@ -1,0 +1,13 @@
+<div class="w-full py-6 px-3">
+  <div class="border rounded-lg bg-white shadow-lg overflow-hidden transition duration-700 ease-in-out hover:scale-105 transform">
+    <div class="h-64 overflow-hidden">
+      {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-cover bg-gray-100' }}
+    </div>
+
+    <div class="flex flex-col justify-between p-4">
+      <span class="text-sm text-gray-400">Vendor</span>
+      <span class="uppercase text-lg font-medium text-gray-700">Product title</span>
+      <span class="text-base text-gray-500">{{ '1999' | money_with_currency }}</span>
+    </div>
+  </div>
+</div>

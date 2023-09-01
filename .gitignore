@@ -1,2 +1,4 @@
 node_modules
-assets/images/*
+assets/*.webp
+assets/*.jpg
+assets/*.png

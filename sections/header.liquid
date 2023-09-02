@@ -1,6 +1,6 @@
 {% assign main_menu_linklist = linklists[section.settings.menu].links %}
 
-<div class="relative bg-white" x-data="{ mobileMenuOpen: false }">
+<div class="relative bg-white" x-data="{ mobileMenuOpen: false, searchBarOpen: false }">
   <div class="mx-auto px-4 sm:px-6">
     <div class="flex justify-between items-center py-3 md:justify-start md:space-x-10">
       <!-- STORE NAME / STORE LOGO -->
@@ -8,7 +8,14 @@
         <h1 class="text-xl font-bold truncate">{{ section.settings.mobile_menu_title }}</h1>
       </div>
 
-      <div class="-mr-2 -my-2 ml-3 md:hidden">
+      <div class="my-2 ml-3 md:hidden justify-between">
+        <button
+          x-on:click="searchBarOpen = !searchBarOpen"
+          type="button"
+          class="bg-white p-2 inline-flex items-center justify-between focus:outline-none">
+          {% render 'icon-search' %}
+        </button>
+
         <button
           x-on:click="mobileMenuOpen = !mobileMenuOpen"
           type="button"
@@ -65,7 +72,10 @@
       </nav>
 
       <div class="hidden md:flex items-center justify-end md:flex-1 space-x-5">
-        <button type="button" class="whitespace-nowrap text-base text-gray-500 hover:text-gray-900">
+        <button
+          x-on:click="searchBarOpen = true"
+          type="button"
+          class="whitespace-nowrap text-base text-gray-500 hover:text-gray-900">
           {% render 'icon-search' %}
         </button>
         <a href="{{ routes.cart_url }}" class="whitespace-nowrap text-base text-gray-500 hover:text-gray-900">
@@ -142,8 +152,33 @@
       </div>
     </div>
   </div>
-</div>
 
+  <div x-show="searchBarOpen" class="w-full bg-white">
+    <button
+      type="button"
+      x-on:click="searchBarOpen = false"
+      class="absolute top-10 right-6 my-6 mt-5 text-gray-500">
+      {% render 'icon-close-menu' %}
+    </button>
+    <div class=" w-screen md:w-auto mt-4 md:mt-8 h-20 md:h-30 flex justify-center items-center">
+      <form
+        action="{{ routes.search_url }}"
+        method="get"
+        class="w-11/12 md:w-72">
+        <div class="w-full md:w-72 pl-2 my-2 text-gray-500 flex justify-center border rounded-full ">
+          <input
+            type="search"
+            name="q"
+            placeholder="Search"
+            class="w-full bg-white h-5 px-15 py-5 rounded-full text-sm focus:outline-none">
+          <button type="submit" class="p-1">
+            {% render 'icon-search' %}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 
 {% schema %}
   {

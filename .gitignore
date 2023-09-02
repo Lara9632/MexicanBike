@@ -2,3 +2,4 @@ node_modules
 assets/*.webp
 assets/*.jpg
 assets/*.png
+.vscode

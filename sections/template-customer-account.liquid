@@ -1,0 +1,60 @@
+<div class="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
+  <h1 class="text-2xl font-bold text-gray-700">Account</h1>
+
+  <div class="block md:flex gap-4">
+    {% assign number_of_orders = customer.orders_count %}
+    {% if number_of_orders > 0 %}
+      <div class="w-full my-6 md:my-12">
+        <h2 class="text-xl font-bold text-gray-700">Order history</h2>
+        {% paginate customer.orders by 6 %}
+          <div class="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
+            {% for order in customer.orders %}
+              <div class="relative border bg-white shadow-lg rounded-lg overflow-hidden transition duration-700 ease-in-out hover:scale-105 transform">
+                <div class="w-full min-64 bg-gray-200 lg:h-64 ">
+                  {% if order.line_items.first.image %}
+                    <a href="{{ order.customer_url }}">
+                      <img
+                        class="w-full h-full object-center object-cover "
+                        src="{{ order.line_items.first.image | img_url: 'large' }}"
+                        alt="{{ order.line_items.first.image.alt }}">
+                    </a>
+                  {% else %}
+                    <a href="{{ order.customer_url }}">{{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-cover' }}</a>
+                  {% endif %}
+                </div>
+
+                <div class="mt-4 flex items-start justify-between">
+                  <div class="mx-1 flex justify-between flex-col">
+                    <h3 class="text-sm text-gray-700">{{ order.line_items.first.title | link_to: order.customer_url }}</h3>
+
+                    <p class="mt-1 text-sm text-gray-500">{{ order.financial_status_label }}</p>
+                  </div>
+                  <div class="mr-2 text-right flex justify-between flex-col">
+                    <p class="text-sm font medium text-white bg-gray-700 rounded-full px-3 py-1">{{ order.fulfillment_status_label }}</p>
+
+                    <p class="mt-1 text-gray-700 text-sm">{{ order.total_price | money_with_currency }}</p>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+          <div class="w-full mx-auto">
+            {% render 'pagination', pagination: paginate %}
+          </div>
+        {% endpaginate %}
+      </div>
+
+    {% else %}
+      <div class="w-full h-80 flex items-center justify-center">
+        <h2 class="text-base md:text-2xl font-medium">You currently don't have any orders</h2>
+      </div>
+    {% endif %}
+    <div class="w-full md:w-1/2 px-2">
+      <h2 class="text-xl font-bold text-gray-700 mb-12">Account details</h2>
+
+      {{ customer.default_address | format_address }}
+
+      <a href="{{ routes.account_addresses_url }}" class="text-sm text-blue-600 hover:text-blue-900 underline">View addresses</a>
+    </div>
+  </div>
+</div>

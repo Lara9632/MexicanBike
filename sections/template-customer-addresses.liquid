@@ -1,4 +1,7 @@
-<div class="max-w-6xl mx-auto px-4 py-12" x-data="{ new_address: false}">
+<div
+  class="max-w-6xl mx-auto px-4 py-12"
+  x-data="{ new_address: false}"
+  x-cloak>
   <div class="flex flex-col md:flex-row items-center justify-between my-5 gap-4">
     <h1 class="text-2xl font-bold text-gray-700">Addresses</h1>
 
@@ -162,21 +165,29 @@
               </div>
 
               <div class="flex flex-row gap-2">
-                <button x-on:click="address_{{ address.id }} = true" type="button" class="w-full btn relative inline-flex items-center justify-start overflow-hidden transition-all bg-gray-700 border rounded-xs hover:bg-gray-700 group py-2">
+                <button
+                  x-on:click="address_{{ address.id }} = true"
+                  type="button"
+                  class="w-full btn relative inline-flex items-center justify-start overflow-hidden transition-all bg-gray-700 border rounded-xs hover:bg-gray-700 group py-2">
                   <span class="w-0 h-full rounded-xs bg-gray-900 absolute right-0 ease-out duration-200 transition-all group-hover:w-full -z-1"></span>
                   <span class="w-full text-xs font-medium text-white transition-colors duration-200 ease-in-out group-hover:text-white z-10">Edit</span>
                 </button>
 
-                <button type="button" class="w-full btn relative inline-flex items-center justify-start overflow-hidden transition-all bg-white border border-gray-700 rounded-xs hover:bg-white hover:border-red-600 group py-2"
-                data-url="{{ address.url }}"
-                data-delete-address>
+                <button
+                  type="button"
+                  class="w-full btn relative inline-flex items-center justify-start overflow-hidden transition-all bg-white border border-gray-700 rounded-xs hover:bg-white hover:border-red-600 group py-2"
+                  data-url="{{ address.url }}"
+                  data-delete-address>
                   <span class="w-0 h-full rounded-xs bg-red-600 absolute left-0 ease-out duration-200 transition-all group-hover:w-full -z-1"></span>
                   <span class="w-full text-xs font-medium text-gray-700 transition-colors duration-200 ease-in-out group-hover:text-white z-10">Delete</span>
                 </button>
               </div>
 
               <form method="post" action="{{ address.url }}">
-                <input type="hidden" name="_method" value="delete">
+                <input
+                  type="hidden"
+                  name="_method"
+                  value="delete">
               </form>
             </div>
 
@@ -292,13 +303,13 @@
                         name="address[phone]"
                         id="address_phone_{{  form.id }}"
                         value="{{ form.phone }}">
-                      </div>
                     </div>
+                  </div>
 
-                    <div class="mb-2 md:mb-2 md:mb-4">
-                      {{ form.set_as_default_checkbox }}
-                      <label for="address_default_address_{{  form.id }}" class="uppercase text-gray-700 text-xs font-medium mb-2">Set as default address</label>
-                    </div>
+                  <div class="mb-2 md:mb-2 md:mb-4">
+                    {{ form.set_as_default_checkbox }}
+                    <label for="address_default_address_{{  form.id }}" class="uppercase text-gray-700 text-xs font-medium mb-2">Set as default address</label>
+                  </div>
 
                   <div class="flex flex-row gap-2">
                     <button type="submit" class="w-full btn relative inline-flex items-center justify-start overflow-hidden transition-all bg-gray-700 border rounded-xs hover:bg-gray-700 group py-2">
@@ -317,12 +328,12 @@
             </div>
 
 
-            </div>
-            </div>
-          {% endfor %}
+          </div>
         </div>
-    {% endpaginate %}
-  </div>
+      {% endfor %}
+    </div>
+  {% endpaginate %}
+</div>
 
 <script>
   class CustomerAddress {
@@ -334,41 +345,62 @@
 
     initDeleteAddressButtons() {
       const deleteButtons = document.querySelectorAll("button[data-delete-address]");
-      if(deleteButtons.length < 1) return;
+      if (deleteButtons.length < 1) 
+        return;
+      
 
       deleteButtons.forEach(button => {
         button.addEventListener("click", function(e) {
           let url = this.dataset.url;
           let confirmation = window.confirm("Do you really wish to delete this address?");
 
-          if(confirmation) document.querySelector(`form[action="${url}"]`).submit();
+          if (confirmation) 
+            document.querySelector(`form[action="${url}"]`).submit();
+          
         })
       })
     }
 
     initCustomerAddress() {
       const allAddressesSelector = document.querySelectorAll("select[data-country-selector]");
-      if (allAddressesSelector.length < 1) return;
+      if (allAddressesSelector.length < 1) 
+        return;
       
+
       allAddressesSelector.forEach(select => {
         let selectedCountry = this.getSelectedCountry(select);
 
-        if(!selectedCountry) return;
+        if (! selectedCountry) 
+          return;
+        
 
         let provinces = selectedCountry.dataset.provinces;
         let arrayOfProvince = JSON.parse(provinces);
 
-        let provinceSelector = document.querySelector(`#address_province_${select.dataset.id}`);
+        let provinceSelector = document.querySelector(`#address_province_${
+          select.dataset.id
+        }`);
 
-        if(arrayOfProvince < 1) provinceSelector.setAttribute('disabled', 'disabled');
-        else provinceSelector.removeAttribute('disabled');
-
-        provinceSelector.innerHTML = '';
+        if (arrayOfProvince < 1) 
+          provinceSelector.setAttribute('disabled', 'disabled');
+         else 
+          provinceSelector.removeAttribute('disabled');
+         provinceSelector.innerHTML = '';
         let options;
-        for(let i = 0; i < arrayOfProvince.length; i++) {
-          if(arrayOfProvince[i][0] === provinceSelector.getAttribute('value'))
-            options += `<option value="${arrayOfProvince[i][0]}" selected>${arrayOfProvince[i][0]}</option>`;
-          else options += `<option value="${arrayOfProvince[i][0]}">${arrayOfProvince[i][0]}</option>`;
+        for (let i = 0; i < arrayOfProvince.length; i++) {
+          if (arrayOfProvince[i][0] === provinceSelector.getAttribute('value')) 
+            options += `<option value="${
+              arrayOfProvince[i][0]
+            }" selected>${
+              arrayOfProvince[i][0]
+            }</option>`;
+           else 
+            options += `<option value="${
+              arrayOfProvince[i][0]
+            }">${
+              arrayOfProvince[i][0]
+            }</option>`;
+          
         }
 
         provinceSelector.innerHTML = options;
@@ -376,11 +408,12 @@
     }
 
     getSelectedCountry(select) {
-      let option, selectedOption;
-      for(let i=0; i<select.options.length; i++) {
+      let option,
+        selectedOption;
+      for (let i = 0; i < select.options.length; i++) {
         option = select.options[i];
 
-        if(option.value === select.getAttribute('value')) {
+        if (option.value === select.getAttribute('value')) {
           selectedOption = option;
           selectedOption.setAttribute('selected', 'selected');
           break;
@@ -392,28 +425,43 @@
 
     customerAddressesSelector() {
       const addressesSelector = document.querySelectorAll("select[data-country-selector]");
-      if(addressesSelector < 1) return;
+      if (addressesSelector < 1) 
+        return;
+      
 
       addressesSelector.forEach(select => {
         select.addEventListener('change', function(e) {
           let provinces = this.options[this.selectedIndex].dataset.provinces;
           let arrayOfProvince = JSON.parse(provinces);
-          
-          let provinceSelector = document.querySelector(`#address_province_${this.dataset.id}`);
 
-          if(arrayOfProvince.length < 1) provinceSelector.setAttribute('disabled', 'disabled');
-          else provinceSelector.removeAttribute('disabled');
+          let provinceSelector = document.querySelector(`#address_province_${
+            this.dataset.id
+          }`);
 
-          provinceSelector.innerHTML = '';
+          if (arrayOfProvince.length < 1) 
+            provinceSelector.setAttribute('disabled', 'disabled');
+           else 
+            provinceSelector.removeAttribute('disabled');
+           provinceSelector.innerHTML = '';
           let options;
-          for(let i = 0; i < arrayOfProvince.length; i++) {
-            if(arrayOfProvince[i][0] === provinceSelector.getAttribute('value'))
-              options += `<option value="${arrayOfProvince[i][0]}" selected>${arrayOfProvince[i][0]}</option>`;
-            else options += `<option value="${arrayOfProvince[i][0]}">${arrayOfProvince[i][0]}</option>`;
+          for (let i = 0; i < arrayOfProvince.length; i++) {
+            if (arrayOfProvince[i][0] === provinceSelector.getAttribute('value')) 
+              options += `<option value="${
+                arrayOfProvince[i][0]
+              }" selected>${
+                arrayOfProvince[i][0]
+              }</option>`;
+             else 
+              options += `<option value="${
+                arrayOfProvince[i][0]
+              }">${
+                arrayOfProvince[i][0]
+              }</option>`;
+            
           }
 
           provinceSelector.innerHTML = options;
-          })
+        })
       })
     }
 

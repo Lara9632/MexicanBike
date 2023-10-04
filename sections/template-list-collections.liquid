@@ -16,7 +16,7 @@
 
                   <img
                     class="w-full h-full object-cover"
-                    src="{{ collection_image | img_url: 'medium' }}"
+                    src="{{ collection_image | image_url: width: 240, height: 240 }}"
                     alt="{{ collection.title | escape }}">
                 </div>
                 <div class="py-4 px-2 bg-gray-100 text-center">
@@ -34,15 +34,15 @@
 
 
 {% schema %}
-  {
-    "name": "Template List Collection",
-    "settings": [
-      {
-        "type": "text",
-        "id": "title",
-        "label": "Title",
-        "default": "Collections"
-      }
-    ]
-  }
+{
+  "name": "Template List Collection",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Collections"
+    }
+  ]
+}
 {% endschema %}

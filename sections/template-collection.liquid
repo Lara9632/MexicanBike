@@ -21,27 +21,29 @@
 
 
 {% schema %}
-  {
-    "name": "Template Collection",
-    "settings": [
-      {
-        "type": "number",
-        "id": "products_per_page",
-        "label": "Products per Page",
-        "default": 6,
-        "info": "Select the number of products to show per page"
-      }, {
-        "type": "text",
-        "id": "label_no_products_to_show",
-        "label": "Label for empty collection",
-        "default": "There are no products inside of this collection",
-        "info": "Set the text that show when the collection is empty"
-      }, {
-        "type": "checkbox",
-        "id": "show_vendor",
-        "label": "Show Vendor",
-        "default": true
-      }
-    ]
-  }
+{
+  "name": "Template Collection",
+  "settings": [
+    {
+      "type": "number",
+      "id": "products_per_page",
+      "label": "Products per Page",
+      "default": 6,
+      "info": "Select the number of products to show per page"
+    },
+    {
+      "type": "text",
+      "id": "label_no_products_to_show",
+      "label": "Label for empty collection",
+      "default": "There are no products inside of this collection",
+      "info": "Set the text that show when the collection is empty"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "Show Vendor",
+      "default": true
+    }
+  ]
+}
 {% endschema %}

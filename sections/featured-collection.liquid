@@ -16,28 +16,30 @@
 </div>
 
 {% schema %}
-  {
-    "name": "Featured Collection",
-    "settings": [
-      {
-        "type": "text",
-        "id": "title",
-        "default": "Featured Collection",
-        "label": "Title"
-      }, {
-        "type": "collection",
-        "id": "featured_collection",
-        "label": "Collection"
-      }, {
-        "type": "number",
-        "id": "number_of_products_to_show",
-        "label": "Products to Show"
-      }
-    ],
-    "presets": [
-      {
-        "name": "Featured Collection"
-      }
-    ]
-  }
+{
+  "name": "Featured Collection",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "default": "Featured Collection",
+      "label": "Title"
+    },
+    {
+      "type": "collection",
+      "id": "featured_collection",
+      "label": "Collection"
+    },
+    {
+      "type": "number",
+      "id": "number_of_products_to_show",
+      "label": "Products to Show"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Collection"
+    }
+  ]
+}
 {% endschema %}

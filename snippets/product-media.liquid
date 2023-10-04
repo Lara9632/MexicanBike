@@ -3,7 +3,7 @@
   <img
     src="{{ media | img_url: 'large' }}"
     alt="{{ media.preview_image.alt }}"
-    class="w-full h-full md:h-96 lg:h-128 obejct-cover">
+    class="w-auto h-full md:h-96 lg:h-128 mx-auto object-cover">
 
   {% when 'external_video' %}
   {{ media | external_video_tag: class: 'w-full h-80 md:h-96 lg:h-128 object-cover' }}
@@ -12,7 +12,23 @@
   {{ media | video_tag: controls: true, class: 'w-full h-80 md:h-96 lg:h-128 object-cover' }}
 
   {% when 'model' %}
-  {{ media | model_viewer_tag }}
+  <product-model>
+    <div>
+      <button x-on:click="productModalOpen = !productModalOpen" class="w-full h-80 md:h-96 lg:h-128 border relative">
+        <span class="border absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+          {% render 'icon-model-viewer' %}
+        </span>
+        <img
+          src="{{ media | img_url: 'large' }}"
+          alt="{{ media.preview_image.alt }}"
+          class="w-auto h-80 md:h-96 lg:h-128 mx-auto object-cover">
+      </button>
+    </div>
+
+    <template>
+      {{ media | model_viewer_tag: reveal: 'interaction' }}
+    </template>
+  </product-model>
 {% else %}
   {{ media | media_tag }}
 {% endcase %}

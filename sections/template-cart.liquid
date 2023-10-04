@@ -21,10 +21,10 @@
             {% for item in cart.items %}
               <tr class="table-row">
                 <td class="py-4 px-2 flex flex-col justify-center">
-                  <a href="{{ item.url}}">
+                  <a href="{{ item.url }}">
                     {% if item.image %}
                       <img
-                        src="{{ item.image | img_url: 'small' }}"
+                        src="{{ item.image | image_url: width: 100, height: 100 }}"
                         alt="{{ item.title | escape }}"
                         class="w-20 h-20 object-cover border">
                     {% else %}
@@ -111,35 +111,38 @@
 
 
 {% schema %}
-  {
-    "name": "Template Cart",
-    "settings": [
-      {
-        "type": "text",
-        "id": "button_update_price",
-        "label": "Update Price Button",
-        "default": "Update"
-      }, {
-        "type": "text",
-        "id": "button_checkout",
-        "label": "Checkout Button",
-        "default": "Checkout"
-      }
-    ],
-    "blocks": [
-      {
-        "type": "subtotal",
-        "name": "Subtotal",
-        "limit": 1
-      }, {
-        "type": "update_button",
-        "name": "Update Button",
-        "limit": 1
-      }, {
-        "type": "checkout_button",
-        "name": "Checkout Button",
-        "limit": 1
-      }
-    ]
-  }
+{
+  "name": "Template Cart",
+  "settings": [
+    {
+      "type": "text",
+      "id": "button_update_price",
+      "label": "Update Price Button",
+      "default": "Update"
+    },
+    {
+      "type": "text",
+      "id": "button_checkout",
+      "label": "Checkout Button",
+      "default": "Checkout"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "subtotal",
+      "name": "Subtotal",
+      "limit": 1
+    },
+    {
+      "type": "update_button",
+      "name": "Update Button",
+      "limit": 1
+    },
+    {
+      "type": "checkout_button",
+      "name": "Checkout Button",
+      "limit": 1
+    }
+  ]
+}
 {% endschema %}
